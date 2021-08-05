@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>plugmusic</title>
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <input id="songTitle" type="text" placeholder="Title">
+    <input id="songArtist" type="text" placeholder="Artist/Author">
+    <button class="uploadFileButton" >UPLOAD</button>
+
+    <div class="filepondWrapper">
+        <input id="pond-upload" type="file" />
+    </div>
+
+    <div class="audio-player">
+        <h1 class="currentSongTitle">Song title</h1>
+        <p class="currentSongAuthor">Song author</p>
+        <audio controls>
+            <source id="audioPlayer" src="https://cdn.filestackcontent.com/a3TWyQhKTWKak9XSx1RY" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>   
+    </div>
+</body>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+<script src="upload.js"></script>
+</html>

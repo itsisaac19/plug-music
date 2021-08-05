@@ -1,0 +1,77 @@
+.playButtonWrapper {
+  margin: auto;
+  display: grid;
+}
+.playButton {
+  user-select: none;
+  position: relative;
+  cursor: pointer;
+  margin: auto;
+  display: grid;
+
+  background: #95b5b2;
+  color: #2e5667;
+
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  box-shadow: 0px 30px 60px #5c889a8a;
+  overflow: hidden;
+}
+
+.playButton:focus {
+  outline: none;
+  box-shadow: 0px 30px 60px #5c889a8a, 0px 0px 0px 5px #95b5b2,
+    0px 0px 0px 7px #5c889a;
+}
+
+.playButton.depressed {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: scale(0.9);
+}
+.playButton.comingUp {
+  transition: transform 1s ease, box-shadow 0.2s ease;
+  transform: scale(1);
+}
+
+.playButton.animate-fill {
+  background: #618492;
+  color: #b1ced8;
+}
+.playButton.animate-reverse {
+  background: #618492;
+}
+
+.playButton.animate-reverse::after {
+  opacity: 1;
+  transition: 1.2s cubic-bezier(0.39, 0.75, 0.26, 1.07);
+  transform: translateY(0%) rotate(0deg);
+}
+
+.playButton.animate-fill::after {
+  opacity: 1;
+  transition: 1.2s cubic-bezier(0.39, 0.75, 0.26, 1.07);
+  transform: translateY(-78%) rotate(400deg);
+}
+.playButton::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  bottom: -50%;
+  left: -50%;
+
+  height: 200%;
+  width: 200%;
+
+  background: #95b5b2;
+
+  border-radius: 45%;
+}
+
+.icon {
+  user-select: none;
+  margin: auto;
+  font-size: 25px;
+  font-weight: bold;
+  z-index: 1000;
+}

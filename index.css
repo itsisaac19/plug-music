@@ -1,0 +1,33 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background: #254e62;
+    color: #a4c0ce;
+}
+
+body * {
+    font-family: inherit;
+}
+
+.uploadFileButton {
+    letter-spacing: 1px;
+}
+
+.audio-player {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+.currentSongAuthor {
+    margin: 0px 0 50px;
+}
+
+.filepondWrapper {
+    margin: 120px auto;
+    width: 550px;
+}

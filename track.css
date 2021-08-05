@@ -1,0 +1,727 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"); @font-face {
+    font-family: "Satoshi-Medium";
+    font-style: normal;
+    font-weight: 500;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60f162c42b6702791dd668c8/fonts/satoshi-medium.woff') format("woff");
+}
+
+@font-face {
+    font-family: "Satoshi-Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60c8dfb401c829d7b60f5d67/fonts/satoshi-bold.otf') format("opentype");
+}
+
+@font-face {
+    font-family: "Satoshi-Regular";
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60e032ae67b50683596e95a5/fonts/satoshi-regular.ttf') format("truetype");
+}
+
+.screen textarea:focus, .screen input:focus {
+    outline: none;
+}
+
+.screen * {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+}
+
+.screen div {
+    -webkit-text-size-adjust: none;
+}
+
+.component-wrapper a {
+    display: contents;
+    pointer-events: auto;
+    text-decoration: none;
+}
+
+.component-wrapper * {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.component-wrapper a *, .component-wrapper input, .component-wrapper video, .component-wrapper iframe {
+    pointer-events: auto;
+}
+
+.component-wrapper.not-ready, .component-wrapper.not-ready * {
+    visibility: hidden !important;
+}
+
+.screen a {
+    display: contents;
+    text-decoration: none;
+}
+
+.full-width-a {
+    width: 100%;
+}
+
+.full-height-a {
+    height: 100%;
+}
+
+.container-center-vertical {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    pointer-events: none;
+}
+
+.container-center-vertical > * {
+    flex-shrink: 0;
+    pointer-events: auto;
+}
+
+.container-center-horizontal {
+    display: grid;
+    place-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container-center-horizontal > * {
+    flex-shrink: 0;
+    pointer-events: auto;
+}
+
+.auto-animated div {
+    --z-index: -1;
+    opacity: 0;
+    position: absolute;
+}
+
+.auto-animated .container-center-vertical, .auto-animated .container-center-horizontal {
+    opacity: 1;
+}
+
+.overlay {
+    display: none;
+    height: 100%;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.overlay.animate-appear {
+    animation: reveal 0.3s ease-in-out 1 normal forwards;
+    display: block;
+    opacity: 0;
+}
+
+.overlay.animate-disappear {
+    animation: reveal 0.3s ease-in-out 1 reverse forwards;
+    display: block;
+    opacity: 1;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-nodelay {
+    animation-delay: 0s;
+}
+
+.align-self-flex-start {
+    align-self: flex-start;
+}
+
+.align-self-flex-end {
+    align-self: flex-end;
+}
+
+.align-self-flex-center {
+    align-self: flex-center;
+}
+
+.valign-text-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.valign-text-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+input:focus {
+    outline: none;
+}
+
+.listeners-active, .listeners-active * {
+    pointer-events: auto;
+}
+
+.hidden, .hidden * {
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.smart-layers-pointers, .smart-layers-pointers * {
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.listeners-active-click, .listeners-active-click * {
+    cursor: pointer;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --jet-stream: #b8d2cf;
+    --summer-green: #95b5b2;
+    --te-papa-green: #263e3c;
+    --font-size-l: 17px;
+    --font-size-m: 16px;
+    --font-size-xl: 23px;
+    --font-size-xxl: 72px;
+    --font-family-satoshi-bold: "Satoshi-Bold", Helvetica;
+    --font-family-satoshi-medium: "Satoshi-Medium", Helvetica;
+    --font-family-satoshi-regular: "Satoshi-Regular", Helvetica;
+}
+
+.satoshi-regular-normal-te-papa-green-16px {
+    color: var(--te-papa-green);
+    font-family: var(--font-family-satoshi-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* screen - track-view */
+.track-view {
+    background-color: #6d989e;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    mix-blend-mode: normal;
+    overflow: hidden;
+    overflow-x: hidden;
+}
+
+.track-view .rectangle-top-left {
+    background-color: var(--summer-green);
+    height: 700px;
+    left: 0px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: 0px;
+    width: calc(100vw - 190px);
+    overflow-y: scroll;
+}
+
+
+
+.rectangle-top-left::after {
+    content: '';
+    position: fixed;
+    bottom: 138px;
+    right: 210px;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(0deg, #95b5b2 0%, #7db9b300 100%);
+}
+
+.track-view .rectangle-top-left::-webkit-scrollbar {
+    background-color: transparent;
+    height: 810px;
+    width: 24px;
+}
+.track-view .rectangle-top-left::-webkit-scrollbar-track {
+    background: #ffffff00;
+}
+.track-view .rectangle-top-left::-webkit-scrollbar-thumb {
+    background-color: #7d9d9a;
+    border-radius: 150px;
+    border: 9px solid var(--summer-green);
+    transition: background-color 0.2s ease;
+}
+
+.track-view .rectangle-top-left::-webkit-scrollbar-thumb:active {
+    background-color: #587774;
+}
+
+.track-view .track-lyrics {
+    background-color: transparent;
+    color: #c9dfdd;
+    font-family: var(--font-family-satoshi-medium);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 500;
+    height: auto;
+    left: 665px;
+    letter-spacing: 0.00px;
+    line-height: 25.7px;
+    mix-blend-mode: normal;
+    position: relative;
+    text-align: left;
+    top: 50px;
+    width: 297px;
+}
+
+.moreinfo {
+    position: relative;
+    top: 260px;
+}
+
+.track-view .rectangle-4-zo3Vw2 {
+    background-color: var(--summer-green);
+    height: 136px;
+    left: 190px;
+    mix-blend-mode: normal;
+    position: absolute;
+    bottom: 0px;
+    width: calc(100vw - 380px);
+    box-shadow: 3px 0px 0px #6d989e;
+}
+
+.track-view .rectangle-8-zo3Vw2 {
+    background-color: #6d989e;
+    height: 3px;
+    left: 0;
+    mix-blend-mode: normal;
+    position: absolute;
+    bottom: 136px;
+    width: 100vw;
+}
+
+.track-view .group-2-zo3Vw2 {
+    background-color: transparent;
+    height: 1250px;
+    left: 379px;
+    position: absolute;
+    top: -401px;
+    transform: rotate(90.00deg);
+    width: 493px;
+}
+
+.track-view .vector-aadna4 {
+    background-color: transparent;
+    height: 470px;
+    left: -379px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: 390px;
+    transform: rotate(-90.00deg);
+    width: 1250px;
+}
+
+.track-view .vector-4reSiF {
+    background-color: transparent;
+    height: 381px;
+    left: -423px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: 435px;
+    transform: rotate(-90.00deg);
+    width: 1250px;
+}
+
+.track-view .vector-RAeu7u {
+    background-color: transparent;
+    height: 268px;
+    left: -480px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: 491px;
+    transform: rotate(-90.00deg);
+    width: 1250px;
+}
+
+.track-view .vector-ALLgVS {
+    background-color: transparent;
+    height: 139px;
+    left: -544px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: 556px;
+    transform: rotate(-90.00deg);
+    width: 1250px;
+}
+
+.track-view .rectangle-1-zo3Vw2 {
+    background-color: var(--jet-stream);
+    border-radius: 17px;
+    height: 10px;
+    top: 6px;
+    mix-blend-mode: normal;
+    position: relative;
+    width: 100%;
+    margin: auto;
+}
+
+.track-view .rectangle-5-zo3Vw2 {
+    background-color: #55726f;
+    border-radius: 17px;
+    height: 10px;
+    left: 0;
+    mix-blend-mode: normal;
+    position: absolute;
+    display: none;
+    top: 6px;
+    width: 186px;
+}
+
+
+.rectangle-1-zo3Vw2 .progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0px;
+
+    height: 10px;
+    width: 0%;
+    transition: width 0.2s;
+
+    border-radius: 17px;
+    background-color: #55726f;
+}
+
+.track-view .bottom-left.now-playing {
+    background-color: var(--summer-green);
+    height: 136px;
+    left: 0px;
+    mix-blend-mode: normal;
+    position: absolute;
+    bottom: 0px;
+    width: 187px;
+    box-shadow: 3px 0px 0px #6d989e;
+}
+
+.track-view .rectangle-6-zo3Vw2 {
+    background-color: var(--summer-green);
+    height: 136px;
+    right: 0px;
+    mix-blend-mode: normal;
+    position: absolute;
+    bottom: 0px;
+    width: 187px;
+    display: grid;
+}
+
+.track-view .rectangle-3-zo3Vw2 {
+    background-color: var(--summer-green);
+    height: calc(100vh - 139px);
+    right: 0px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: 0px;
+    width: 187px;
+    box-shadow: -3px 0px 0px #6d989e;
+}
+
+.track-view .group-1-zo3Vw2 {
+    background-color: transparent;
+    height: 59px;
+    left: 1317px;
+    position: absolute;
+    top: 802px;
+    width: 59px;
+}
+
+.track-view .ellipse-1-EZcyzG {
+    background-color: transparent;
+    height: 128px;
+    left: -64px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: -0px;
+    width: 187px;
+}
+
+.track-view .polygon-1-EZcyzG {
+    background-color: transparent;
+    height: 20px;
+    left: 20px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: 20px;
+    width: 18px;
+}
+
+.track-view .group-3-zo3Vw2 {
+    background-color: transparent;
+    height: 73px;
+    left: 156px;
+    position: absolute;
+    top: 387px;
+    width: 73px;
+}
+
+.track-view .ellipse-1-hwdxot {
+    background-color: transparent;
+    height: 201px;
+    left: -64px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: -30px;
+    width: 201px;
+}
+
+.track-view .polygon-1-hwdxot {
+    background-color: transparent;
+    height: 25px;
+    left: 25px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: 24px;
+    width: 22px;
+}
+
+.track-view .track-title {
+    background-color: transparent;
+    color: #ffffff;
+    font-family: var(--font-family-satoshi-bold);
+    font-size: var(--font-size-xxl);
+    font-style: normal;
+    font-weight: 700;
+    height: auto;
+    left: 0;
+    letter-spacing: 0.00px;
+    line-height: 88.2px;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    top: 0px;
+    width: 484px;
+}
+
+.track-view .now-playing-track-title {
+    background-color: transparent;
+    color: #dbf0ee;
+    font-family: var(--font-family-satoshi-bold);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 700;
+    height: auto;
+    left: 26px;
+    letter-spacing: 0.00px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    bottom: 25px;
+    width: 136px;
+}
+
+.track-view .track-title.listItem {
+    background-color: transparent;
+    color: #2f4c59;
+    font-family: var(--font-family-satoshi-bold);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 700;
+    height: auto;
+    left: 1288px;
+    letter-spacing: 0.00px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    top: 71px;
+    width: 112px;
+}
+
+.track-view .tenant-zo3Vw2 {
+    background-color: transparent;
+    color: var(--jet-stream);
+    font-family: var(--font-family-satoshi-bold);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 700;
+    height: auto;
+    left: 1288px;
+    letter-spacing: 0.00px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    top: 129px;
+    width: 61px;
+}
+
+.track-view .the-words-zo3Vw2 {
+    background-color: transparent;
+    color: var(--jet-stream);
+    font-family: var(--font-family-satoshi-bold);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 700;
+    height: auto;
+    left: 1288px;
+    letter-spacing: 0.00px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    top: 169px;
+    width: 112px;
+}
+
+.track-view .track-artist {
+    background-color: transparent;
+    color: #ffffff;
+    font-family: var(--font-family-satoshi-medium);
+    font-size: var(--font-size-xl);
+    font-style: normal;
+    font-weight: 500;
+    height: auto;
+    left: 0;
+    letter-spacing: 0.00px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    top: 205px;
+    width: 218px;
+}
+
+.track-view .about-the-artist-zo3Vw2 {
+    background-color: transparent;
+    height: auto;
+    left: 156px;
+    letter-spacing: 2.64px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    top: 0px;
+    width: 218px;
+}
+
+.track-view .x053-zo3Vw2 {
+    background-color: transparent;
+    height: auto;
+    letter-spacing: 2.64px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    margin: auto;
+    text-align: left;
+}
+
+.track-view .x252-zo3Vw2 {
+    background-color: transparent;
+    color: #5b7774;
+    font-family: var(--font-family-satoshi-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+    height: auto;
+    letter-spacing: 2.64px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    text-align: left;
+    margin: auto;
+}
+
+.track-view .lyrics-zo3Vw2 {
+    background-color: transparent;
+    height: auto;
+    left: 665px;
+    letter-spacing: 2.64px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    top: 0px;
+    width: 78px;
+}
+
+.track-view .now-playing-text {
+    background-color: transparent;
+    height: auto;
+    left: 26px;
+    letter-spacing: 2.64px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    bottom: 90px;
+    width: 139px;
+}
+
+.track-view .tracks-zo3Vw2 {
+    background-color: transparent;
+    height: auto;
+    left: 1288px;
+    letter-spacing: 2.64px;
+    line-height: normal;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    top: 31px;
+    width: 82px;
+}
+
+.track-view .track-artist-details {
+    background-color: transparent;
+    color: #c9dfdd;
+    font-family: var(--font-family-satoshi-medium);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 500;
+    height: auto;
+    left: 156px;
+    letter-spacing: 0.00px;
+    line-height: 25.7px;
+    mix-blend-mode: normal;
+    position: absolute;
+    text-align: left;
+    top: 50px;
+    width: 297px;
+}
+
+.track-view .rectangle-8-N3xhvD {
+    background-color: transparent;
+    height: 196px;
+    left: 156px;
+    mix-blend-mode: normal;
+    position: absolute;
+    top: 565px;
+    width: 804px;
+}
+
+
+.music-player-wrapper {
+    position: relative;
+    width: auto;
+    height: 100%;
+    grid-template-rows: 1fr;
+    padding: 30px 110px;
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+}
+
+.music-player-container {
+    margin: auto 10px;
+    width: auto;
+    height: 20px;
+    position: relative;
+}
+
+.track-details {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    top: 121px;
+    left: 156px;
+}
