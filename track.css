@@ -199,7 +199,7 @@ input:focus {
 }
 
 .satoshi-regular-normal-te-papa-green-16px {
-    color: var(--te-papa-green);
+    color: #070c0c;
     font-family: var(--font-family-satoshi-regular);
     font-size: var(--font-size-m);
     font-style: normal;
@@ -220,22 +220,32 @@ input:focus {
 }
 
 .track-view .rectangle-top-left {
-    background-color: var(--summer-green);
+    background-color: rgba(149, 181, 178, 1);
     height: calc(100vh - 139px);
     left: 0px;
     position: absolute;
     top: 0px;
-    width: calc(100vw - 190px);
+    width: 100vw;
     overflow-y: scroll;
     overflow-x: hidden;
+    opacity: 1;
+    transition: top 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s ease-out;
 }
 
+.track-view .rectangle-top-left.waiting {
+    opacity: 0;
+    top: 10px;
+    background-color: rgba(149, 181, 178, 0);
+}
 
+.rectangle-top-left.waiting::after {
+    display: none;
+}
 
 .rectangle-top-left::after {
     content: '';
     position: fixed;
-    display: block;
+    display: none;
     bottom: 138px;
     right: 210px;
     width: 100%;
@@ -265,7 +275,7 @@ input:focus {
 
 .track-view .track-lyrics {
     background-color: transparent;
-    color: #c9dfdd;
+    color: rgb(12, 39, 39);
     font-family: var(--font-family-satoshi-medium);
     font-size: var(--font-size-m);
     font-style: normal;
@@ -273,12 +283,12 @@ input:focus {
     height: auto;
     left: 60%;
     letter-spacing: 0.00px;
-    line-height: 25.7px;
+    line-height: 32.7px;
     mix-blend-mode: normal;
     position: absolute;
     text-align: left;
     top: 50px;
-    width: 297px;
+    width: 337px;
 }
 
 .moreinfo {
@@ -454,7 +464,17 @@ input:focus {
     width: 187px;
     box-shadow: 3px 0px 0px #a4c1bf;
 }
-
+.track-view .bottom-left.waiting, 
+.track-view .rectangle-4-zo3Vw2.waiting,
+.track-view .rectangle-6-zo3Vw2.waiting
+{
+    opacity: 0;
+    bottom: -10px;
+}
+.track-view .rectangle-8-zo3Vw2.waiting {
+    opacity: 0;
+    bottom: 126px;
+}
 .track-view .rectangle-6-zo3Vw2 {
     background-color: #a4c1bf;
     height: 136px;
@@ -475,6 +495,7 @@ input:focus {
     position: absolute;
     top: 0px;
     width: 187px;
+    display: none;
     box-shadow: -3px 0px 0px #8caba8;
 }
 
@@ -556,7 +577,7 @@ input:focus {
 
 .track-view .now-playing-track-title {
     background-color: transparent;
-    color: #dbf0ee;
+    color: #172d2b;
     font-family: var(--font-family-satoshi-bold);
     font-size: var(--font-size-l);
     font-style: normal;
@@ -669,7 +690,7 @@ input:focus {
 
 .track-view .x252-zo3Vw2 {
     background-color: transparent;
-    color: #5b7774;
+    color: #123330;
     font-family: var(--font-family-satoshi-regular);
     font-size: var(--font-size-m);
     font-style: normal;
@@ -723,7 +744,7 @@ input:focus {
 
 .track-view .track-artist-details {
     background-color: transparent;
-    color: #c9dfdd;
+    color: rgb(12, 39, 39);
     font-family: var(--font-family-satoshi-medium);
     font-size: var(--font-size-m);
     font-style: normal;
@@ -731,18 +752,24 @@ input:focus {
     height: auto;
     left: 156px;
     letter-spacing: 0.00px;
-    line-height: 25.7px;
+    line-height: 32.7px;
     mix-blend-mode: normal;
     position: absolute;
     text-align: left;
     top: 50px;
-    width: 297px;
+    width:337px;
 }
 
 .bg-waves {
     position: absolute;
     width: 100%;
     height: 520px;
+    opacity: 1;
+    transition: opacity 1.5s cubic-bezier(.17,.67,.16,1.03), height 1.5s cubic-bezier(.17,.67,.16,1.03);
+}
+.bg-waves.waiting {
+    opacity: 0;
+    height: 400px;
 }
 
 .track-view .rectangle-8-N3xhvD {

@@ -9,16 +9,21 @@
   margin: auto;
   display: grid;
 
-  background: #95b5b2;
-  color: #2e5667;
+  background: #284652;
+  color: #b7ced8;
 
   height: 70px;
   width: 70px;
   border-radius: 50%;
-  box-shadow: 0px 30px 60px #5c889a8a;
+  box-shadow: 0px 30px 60px #21373f68;
   overflow: hidden;
 }
 
+.playButton.animate-reverse:focus {
+  outline: none;
+  box-shadow: 0px 30px 60px #5c889a8a, 0px 0px 0px 5px #95b5b2,
+    0px 0px 0px 7px #284652;
+}
 .playButton:focus {
   outline: none;
   box-shadow: 0px 30px 60px #5c889a8a, 0px 0px 0px 5px #95b5b2,
@@ -63,7 +68,7 @@
   height: 200%;
   width: 200%;
 
-  background: #95b5b2;
+  background: #284652;
 
   border-radius: 45%;
 }
