@@ -44,11 +44,11 @@ let progressAnimationTimeout;
 function stopProgress () {
     clearTimeout(progressAnimationTimeout);
     clearTimeout(progressLoopTimeout);
-    console.warn('stopping progress');
+    console.warn('STOPPING AUDIO');
 }
 
 function progressLoop (isPlaying) {
-    if (isPlaying == false) return stopProgress();
+    if (isPlaying == false || audioPlayButton._isPlaying == false) return stopProgress();
     let animationStep = 0.5; // seconds
 
     increaseProgress(animationStep);
@@ -75,7 +75,9 @@ function setAudioCurrentTime (seconds) {
 
 audioPlayButton.onPlay(isPlaying => {
     isPlaying ? audio.play() : audio.pause();
-    console.log('button state', isPlaying);
+    isPlaying ? playNoAction(document.querySelector('#main-massive')) : pauseNoAction(document.querySelector('#main-massive'));
+    console.log('RECIEVED ONPLAY CALLBACK, isPlaying=', isPlaying);
+    
     progressLoop(isPlaying);
 })
 

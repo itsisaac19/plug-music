@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script>
+        window.location.href = "index.html"
+    </script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link rel="stylesheet" href="upload.css">
+</head>
+<body>
+    <div class="upload-wrapper">
+        <input id="songTitle" type="text" placeholder="Title">
+        <input id="songArtist" type="text" placeholder="Artist/Author">
+        
+        <div class="filepondWrapper">
+            <input id="pond-upload" type="file" />
+        </div>
+    </div>
+</body>
+
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+<script src="upload.js"></script>
+</html>

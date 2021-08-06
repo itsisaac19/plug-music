@@ -1,33 +1,120 @@
+@font-face {
+    font-family: "Satoshi-Medium";
+    font-style: normal;
+    font-weight: 500;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60f162c42b6702791dd668c8/fonts/satoshi-medium.woff') format("woff");
+}
+
+@font-face {
+    font-family: "Satoshi-Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60c8dfb401c829d7b60f5d67/fonts/satoshi-bold.otf') format("opentype");
+}
+
+@font-face {
+    font-family: "Satoshi-Regular";
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60e032ae67b50683596e95a5/fonts/satoshi-regular.ttf') format("truetype");
+}
+
+.filepond--root {
+    font-family: Satoshi-Regular;
+}
+
+.filepond--drop-label.filepond--drop-label label {
+    font-family: "Satoshi-Medium";
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    background: #254e62;
-    color: #a4c0ce;
+    font-family: Satoshi-Regular;
+    margin: 0;
+    background: #1b262b;
 }
 
 body * {
     font-family: inherit;
 }
 
-.uploadFileButton {
-    letter-spacing: 1px;
+
+.main-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 100vh;
+}
+.main-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    height: 100%;
 }
 
-.audio-player {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-
+.main-split-right, .main-split-left {
     display: grid;
     place-items: center;
-    text-align: center;
-}
-.currentSongAuthor {
-    margin: 0px 0 50px;
 }
 
-.filepondWrapper {
-    margin: 120px auto;
-    width: 550px;
+.main-split-right {
+    background: #33434b;
+}
+.hero-container {
+    width: 50%;
+    margin: auto;
+}
+h1.hero-title {
+    position: relative;
+    font-family: "Satoshi-Bold";
+    color: #95b5b2;
+    font-size: 4.5rem;
+}
+
+.hero-title::after {
+    content: '↓';
+    position: absolute;
+    left: 0;
+    bottom: -100px;
+    color: #6f9692;
+    font-size: 35px;
+}
+
+.second-section {
+    background:#95b5b2;
+    height: 600px;
+}
+
+.left-split {
+    display: grid;
+}
+.hero-img {
+    margin: auto;
+    max-width: 700px;
+    width: calc(100% - 100px);
+}
+
+
+.second-section-text-wrapper {
+    display: grid;
+    place-items: center;
+    height: 100%;
+}
+
+.second-section-text-wrapper button {
+    cursor: pointer;
+    background: #445b58;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 200px;
+    height: 50px;
+    box-shadow: 0px 20px 60px #3a606e8a;
+    transition: background 0.2s ease-in-out;
+}
+
+
+.second-section-text-wrapper button:hover {
+    background: #566f6c;
 }

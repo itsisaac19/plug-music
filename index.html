@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    window.location.href = '/track.html'
-</script>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>plugmusic</title>
-    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <input id="songTitle" type="text" placeholder="Title">
-    <input id="songArtist" type="text" placeholder="Artist/Author">
-    <button class="uploadFileButton" >UPLOAD</button>
-
-    <div class="filepondWrapper">
-        <input id="pond-upload" type="file" />
+    <div class="main-wrapper">
+        <div class="main-split">
+            <div class="main-split-left">
+                <div class="left-split">
+                    <img class="hero-img" src="hero-track-view.png" alt="">
+                </div>
+            </div>
+            <div class="main-split-right">
+                <div class="hero-container">
+                    <h1 class="hero-title">
+                        YOUR
+                        <br>
+                        VOICE
+                        <br> 
+                        IS
+                        <br>
+                        HERE.
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="second-section">
+            <div class="second-section-text-wrapper">
+                <button onclick="window.location.href='track.html'">SEE A LIVE DEMO</button>
+            </div>
+        </div>
     </div>
 
-    <div class="audio-player">
-        <h1 class="currentSongTitle">Song title</h1>
-        <p class="currentSongAuthor">Song author</p>
-        <audio controls>
-            <source id="audioPlayer" src="https://cdn.filestackcontent.com/a3TWyQhKTWKak9XSx1RY" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>   
-    </div>
 </body>
-<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
 <script src="upload.js"></script>
 </html>
