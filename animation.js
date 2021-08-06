@@ -1,66 +1,61 @@
 class AudioButton {
-    constructor(buttonSelector) {
-        this.button = document.querySelector(buttonSelector);
-        this.isPlaying = false;
-        this._isPlaying = false;
-    }
-    playButtonListener = (state) => {}
-    onPlay(cb) {
-        this.playButtonListener = cb;
-    }
-    set isPlaying (state) {
-      this._isPlaying = state;
-      this.playButtonListener(state)
-    }
+  constructor(buttonElement) {
+    this.button = buttonElement;
+    this.isPlaying = false;
+    this._isPlaying = false;
+  }
+  play(button) {
+    button.classList.remove('animate-reverse')
+    button.classList.add('animate-fill')
+    
+    button.onclick = () => {
+      audioPlayButton.pause(this.button)
+    };
+
+    audioPlayButton.isPlaying = true;
+
+    button.querySelectorAll('.icon')[0].innerHTML = '| |'
+  }
+  pause(button) {
+    button.classList.add('animate-reverse')
+    button.classList.remove('animate-fill')
+    
+    button.onclick = () => {
+      audioPlayButton.play(this.button)
+    };
+
+    audioPlayButton.isPlaying = false;
+    
+    button.querySelectorAll('.icon')[0].innerHTML = '▶'
+  }
+  playButtonListener = (state) => {}
+  onPlay(cb) {
+      this.playButtonListener = cb;
+  }
+  set isPlaying (state) {
+    this._isPlaying = state;
+    this.playButtonListener(state)
+  }
 }
 
-const audioPlayButton = new AudioButton('#bottom-right');
+const audioPlayButton = new AudioButton(document.querySelector('#bottom-right'));
 
 function playButton (buttonSelector, actions=true) {
-    const button = document.querySelector(buttonSelector ?? '#button')
-    
+  const button = document.querySelector(buttonSelector ?? '#button')
+  
+  button.onclick = () => {
+    audioPlayButton.play(button)
+  };
 
-    button.onclick = play;
-    
+  button.addEventListener('mousedown', () => {
+    button.classList.add('depressed')
+    button.classList.remove('comingUp')
+  })
 
-    function play () {
-      button.focus()
-      button.classList.remove('animate-reverse')
-      console.log(button);
-      button.classList.add('animate-fill')
-      
-      button.onclick = pause;
-      if (actions) {
-        audioPlayButton.isPlaying = true;
-      }
-      button.querySelectorAll('.icon')[0].innerHTML = '| |'
-    }
-  
-    function pause () {
-      button.focus()
-      button.classList.add('animate-reverse')
-      console.log(button);
-      button.classList.remove('animate-fill')
-      
-      button.onclick = play;
-      if (actions) {
-        audioPlayButton.isPlaying = false;
-      }
-
-      button.querySelectorAll('.icon')[0].innerHTML = '▶'
-    }
-  
-  
-  
-    button.addEventListener('mousedown', () => {
-      button.classList.add('depressed')
-      button.classList.remove('comingUp')
-    })
-  
-    document.addEventListener('mouseup', () => {
-      button.classList.remove('depressed')
-      button.classList.add('comingUp')
-    })
+  document.addEventListener('mouseup', () => {
+    button.classList.remove('depressed')
+    button.classList.add('comingUp')
+  })
 }
 playButton('#bottom-right');
 

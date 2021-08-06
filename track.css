@@ -304,7 +304,7 @@ input:focus {
 }
 
 .track-view .rectangle-4-zo3Vw2 {
-    background-color: var(--summer-green);
+    background-color: #a4c1bf;
     height: 136px;
     left: 190px;
     mix-blend-mode: normal;
@@ -315,7 +315,7 @@ input:focus {
 }
 
 .track-view .rectangle-8-zo3Vw2 {
-    background-color: #6d989e;
+    background-color: #a4c1bf;
     height: 3px;
     left: 0;
     mix-blend-mode: normal;
@@ -379,6 +379,7 @@ input:focus {
 }
 
 .track-view .rectangle-1-zo3Vw2 {
+    cursor: pointer;
     background-color: var(--jet-stream);
     border-radius: 17px;
     height: 10px;
@@ -415,19 +416,47 @@ input:focus {
     background-color: #55726f;
 }
 
+.progress-bar .handle-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+}
+
+.handle {
+    opacity: 0;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+
+    background: #2d5567;
+    border-radius: 50%;
+    
+    height: 20px;
+    width: 20px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.handle:hover {
+    background: #2d5567;
+}
+.player-box:hover .progress-bar .handle-wrapper .handle {
+    opacity: 1;
+}
+
 .track-view .bottom-left.now-playing {
-    background-color: var(--summer-green);
+    background-color: #a4c1bf;
     height: 136px;
     left: 0px;
     mix-blend-mode: normal;
     position: absolute;
     bottom: 0px;
     width: 187px;
-    box-shadow: 3px 0px 0px #6d989e;
+    box-shadow: 3px 0px 0px #a4c1bf;
 }
 
 .track-view .rectangle-6-zo3Vw2 {
-    background-color: var(--summer-green);
+    background-color: #a4c1bf;
     height: 136px;
     right: 0px;
     mix-blend-mode: normal;
@@ -435,17 +464,18 @@ input:focus {
     bottom: 0px;
     width: 187px;
     display: grid;
+    box-shadow: -3px 0px 0px #a4c1bf;
 }
 
 .track-view .rectangle-3-zo3Vw2 {
-    background-color: var(--summer-green);
+    background-color: #8caba8;
     height: calc(100vh - 139px);
     right: 0px;
     mix-blend-mode: normal;
     position: absolute;
     top: 0px;
     width: 187px;
-    box-shadow: -3px 0px 0px #6d989e;
+    box-shadow: -3px 0px 0px #8caba8;
 }
 
 .track-view .group-1-zo3Vw2 {
@@ -734,6 +764,12 @@ input:focus {
     padding: 30px 110px;
     display: grid;
     grid-template-columns: 100px 1fr 100px;
+}
+
+.player-box {
+    cursor: pointer;
+    position: relative;
+    display: grid;
 }
 
 .music-player-container {
