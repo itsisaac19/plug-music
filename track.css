@@ -186,6 +186,8 @@ input:focus {
 }
 
 :root {
+    --main-bg: rgb(198, 224, 222);
+    --footer-bg: rgb(213, 236, 234);
     --jet-stream: #b8d2cf;
     --summer-green: #95b5b2;
     --te-papa-green: #263e3c;
@@ -220,7 +222,7 @@ input:focus {
 }
 
 .track-view .rectangle-top-left {
-    background-color: rgba(149, 181, 178, 1);
+    background-color: var(--main-bg);
     height: calc(100vh - 139px);
     left: 0px;
     position: absolute;
@@ -305,27 +307,31 @@ input:focus {
     height: 100px;
 }
 #main-massive {
+    z-index: 10;
     width: 100px;
     height: 100px;
     border-radius: 50%;
+}
+#bottom-right {
+    z-index: 10;
 }
 #main-massive .icon {
     font-size: 30px;
 }
 
 .track-view .rectangle-4-zo3Vw2 {
-    background-color: #a4c1bf;
+    background-color: var(--footer-bg);
     height: 136px;
     left: 190px;
     mix-blend-mode: normal;
     position: absolute;
     bottom: 0px;
     width: calc(100vw - 380px);
-    box-shadow: 3px 0px 0px #6d989e;
+    box-shadow: 3px 0px 0px  var(--footer-bg);
 }
 
 .track-view .rectangle-8-zo3Vw2 {
-    background-color: #a4c1bf;
+    background-color:  var(--footer-bg);
     height: 3px;
     left: 0;
     mix-blend-mode: normal;
@@ -450,19 +456,19 @@ input:focus {
 .handle:hover {
     background: #2d5567;
 }
-.player-box:hover .progress-bar .handle-wrapper .handle {
+.music-player-wrapper:hover .progress-bar .handle-wrapper .handle {
     opacity: 1;
 }
 
 .track-view .bottom-left.now-playing {
-    background-color: #a4c1bf;
+    background-color: var(--footer-bg);
     height: 136px;
     left: 0px;
     mix-blend-mode: normal;
     position: absolute;
     bottom: 0px;
     width: 187px;
-    box-shadow: 3px 0px 0px #a4c1bf;
+    box-shadow: 3px 0px 0px  var(--footer-bg);
 }
 .track-view .bottom-left.waiting, 
 .track-view .rectangle-4-zo3Vw2.waiting,
@@ -476,7 +482,7 @@ input:focus {
     bottom: 126px;
 }
 .track-view .rectangle-6-zo3Vw2 {
-    background-color: #a4c1bf;
+    background-color: var(--footer-bg);
     height: 136px;
     right: 0px;
     mix-blend-mode: normal;
@@ -484,7 +490,7 @@ input:focus {
     bottom: 0px;
     width: 187px;
     display: grid;
-    box-shadow: -3px 0px 0px #a4c1bf;
+    box-shadow: -3px 0px 0px  var(--footer-bg);
 }
 
 .track-view .rectangle-3-zo3Vw2 {
