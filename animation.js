@@ -10,10 +10,6 @@ class plugPage {
 
 const Page = new plugPage();
 
-setTimeout(() => {
-    Page.init();
-}, 1000)
-
 const dQS = (selector) => document.querySelector(selector);
     
 

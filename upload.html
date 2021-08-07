@@ -1,29 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
     <script>
-        window.location.href = "index.html"
+        //window.location.href = "index.html"
     </script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.28.2/filepond.min.css" integrity="sha512-fy2OTOLBtWM4nJHj5gi4dyJ051/pQVpJtcIHlpw+0JNjzF4aWJImXukB5tkDRkeRjAfr7eM0ZFLdgM4hDUW70Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="upload.css">
 </head>
 <body>
-    <div class="upload-wrapper">
-        <input id="songTitle" type="text" placeholder="Title">
-        <input id="songArtist" type="text" placeholder="Artist/Author">
-        
-        <div class="filepondWrapper">
-            <input id="pond-upload" type="file" />
+
+    <div class="main-content">
+        <div class="main-inner">
+            <div class="upload-directions">
+                <h1>UPLOAD A TRACK</h1>
+                <p>
+                    To upload a track, you need to add a title, author, and description. 
+                    Then select the track you want to upload using the file picker.
+
+                    <br><br>
+
+                    Optionally, you can add lyrics to the track.
+                </p>
+            </div>
+
+            <div class="upload-wrapper">
+                <input class="track-detail" type=""id="trackTitle" type="text" placeholder="Title">
+                <input class="track-detail" id="trackArtist" type="text" placeholder="Artist/Author">
+                <textarea placeholder="Description" name="" id="" cols="30" rows="10"></textarea>
+                <div class="lyrics-upload-wrapper">
+                    <textarea placeholder="Lyrics (optional)" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="filepondWrapper">
+                    <input id="pond-upload" type="file" />
+                </div>
+            </div>
         </div>
     </div>
+
 </body>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
 
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
-<script src="upload.js"></script>
+<script type="module" src="upload.js"></script>
 </html>

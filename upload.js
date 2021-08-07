@@ -1,29 +1,66 @@
 const FILESTACK_API_KEY = 'ALxoEda6VQ76Ilj7wYtGEz';
-
+const file_io_API_KEY = '7O6BWVS.RJM0VBK-P4SMNQR-H823K5W-RWF4XWK'
 
 // Get a reference to the file input element
 const uploadElement = document.querySelector('#pond-upload');
 
+(async () => {
+    const filePond = await import('./filepond.js');
+    console.log(filePond)
+})
+
+
+
+FilePond.registerPlugin(FilePondPluginFileValidateType);
+
+
+
 // Create a FilePond instance
 const pond = FilePond.create(uploadElement, {
+    acceptedFileTypes: ['audio/mpeg'],
+    fileValidateTypeLabelExpectedTypes: 'Expects audio/mpeg',
+    labelFileTypeNotAllowed: 'Only audio/mpeg files are accepted',
+    fileValidateTypeDetectType: (source, type) =>
+        new Promise((resolve, reject) => {
+            // Do custom type detection here and return with promise
+            resolve(type);
+    }),
+    instantUpload: false,
     server: {
-        url: 'https://api.sound.farm/audiofiles',
+        url: 'https://file.io/',
         load: (res) => {
             console.log(res);
         },
         error: (res) => {
             console.log(res);
         },
+        revert: (res) => {
+            const file = JSON.parse(res);
+            console.log(file);
+            const request = new XMLHttpRequest();
+
+            request.onreadystatechange = function() {
+                if (request.readyState === 4) {
+                  console.log('Deleted file');
+                }
+            }
+
+            request.open('DELETE', `https://file.io/${file.key}`);
+            request.setRequestHeader("Authorization", "Basic N082QldWUy5SSk0wVkJLLVA0U01OUVItSDgyM0s1Vy1SV0Y0WFdLOg==");
+            request.send();
+        },
         process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
             // fieldName is the name of the input field, file is the actual file object to send
             const formData = new FormData();
-            formData.append(fieldName, file, file.name);
+            formData.append('file', file, file.name);
 
             let trackName = document.querySelector('#track-name')?.value || file.name.substring(0, 10);
 
             const request = new XMLHttpRequest();
-            request.open('POST', `https://www.filestackapi.com/api/store/S3?filename=${trackName}&key=ALxoEda6VQ76Ilj7wYtGEz`);
-            request.setRequestHeader('Content-Type', 'audio/mpeg')
+            //request.withCredentials = true;
+
+            request.open('POST', `https://file.io/`);
+            request.setRequestHeader("Authorization", "Basic N082QldWUy5SSk0wVkJLLVA0U01OUVItSDgyM0s1Vy1SV0Y0WFdLOg==");
 
             request.upload.onprogress = (e) => {
                 progress(e.lengthComputable, e.loaded, e.total);
@@ -43,7 +80,7 @@ const pond = FilePond.create(uploadElement, {
                 }
             }
             
-            request.send(file)
+            request.send(formData)
             
             // Should expose an abort method so the request can be cancelled
             return {
@@ -102,10 +139,11 @@ const db = firebase.database();
 function saveTrackUrl (uploadResponseData) {
     console.log(uploadResponseData)
 
-    let trackURL = uploadResponseData.url;
-    let trackID = trackURL.replace(/https:\/\/cdn\.filestackcontent\.com\//, '');
-    
-    let trackName = uploadResponseData.filename;
+    let trackURL = uploadResponseData.link;
+    let trackID = uploadResponseData.key;
+    //let trackID = trackURL.replace(/https:\/\/cdn\.filestackcontent\.com\//, '');
+    //let trackName = uploadResponseData.filename;
+    let trackName = uploadResponseData.name;
     
     db.ref(`/tracks/${trackID}`).set({
         url: trackURL,

@@ -1,13 +1,138 @@
-.currentSongAuthor {
-    margin: 0px 0 50px;
+@font-face {
+    font-family: "Satoshi-Medium";
+    font-style: normal;
+    font-weight: 500;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60f162c42b6702791dd668c8/fonts/satoshi-medium.woff') format("woff");
 }
 
+@font-face {
+    font-family: "Satoshi-Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60c8dfb401c829d7b60f5d67/fonts/satoshi-bold.otf') format("opentype");
+}
+
+@font-face {
+    font-family: "Satoshi-Regular";
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60e032ae67b50683596e95a5/fonts/satoshi-regular.ttf') format("truetype");
+}
+
+body {
+    background: #1E2E2F;
+    font-family: Satoshi-Medium;
+}
+.main-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.main-inner {
+    height: 600px;
+    margin: 10px 10px 10px 10%;
+}
+
+.upload-wrapper .lyrics-upload-wrapper textarea {
+    height: 280px;
+    width: 300px;
+}
+.lyrics-upload-wrapper {
+    position: absolute;
+    left: 570px;
+}
+
+@media screen and (max-width: 1200px) {
+    .lyrics-upload-wrapper {
+        position: relative;
+        left: 0;
+        display: grid;
+    }
+    .upload-wrapper .lyrics-upload-wrapper textarea {
+        width: auto;
+        margin: 20px 0 auto 0px;
+    }
+    .main-inner {
+        margin: 10px 10px 10px 10px;
+    }
+}
+
+.upload-directions {
+    width: 50%;
+    margin: 100px auto auto 100px;
+}
+
+.upload-directions > h1 {
+    color: #F0FEFF;
+    font-family: Satoshi-Bold;
+}
+.upload-directions > p {
+    color: #c0d7d8;
+    max-width: 500px;
+}
+
+.filepond--drop-label {
+    background: #9eb6b7;
+    color: #0b2021;
+    border-radius: 7px;
+    font-family: Satoshi-Medium;
+}
+.filepond--root .filepond--credits {
+    display: none;
+}
 
 .upload-wrapper {
-    top: 50%;
+    position: relative;
+    margin: 50px auto auto 100px;
+    width: 550px;
+    height: 300px;
+    display: grid;
+}
+
+.upload-wrapper textarea {
+    font-family: Satoshi-Medium;
+    font-size: 15px;
+    margin: 20px 0 auto 0px;
+    height: 100px;
+    background: #314344;
+    padding: 10px;
+    text-indent: 5px;
+    color: #9eb6b7;
+    resize: none;
+    border: 1px solid #18242500;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+.upload-wrapper textarea:focus {
+    background: #395152;
+    outline: none;
+}
+.upload-wrapper textarea::placeholder {
+    color: #182425;
 }
 
 .filepondWrapper {
-    margin: 120px auto;
+    margin: 40px auto;
     width: 550px;
+}
+
+.track-detail {
+    margin: 20px auto auto 0px;
+    background: #314344;
+    color: #9eb6b7;
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+    width: 520px;
+    font-size: 30px;
+    padding: 20px 15px 20px 15px;
+    font-family: Satoshi-Bold;
+}
+.track-detail:focus {
+    background: #395152;
+    outline: none;
+}
+.track-detail::placeholder {
+    color: #182425;
 }
