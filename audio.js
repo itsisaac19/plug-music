@@ -1,3 +1,15 @@
+firebase.initializeApp({
+    apiKey: "AIzaSyAhWA9p5XPVlnTLKZPMt7D5lPqcgjPGLAY",
+    authDomain: "plug-music-app-database.firebaseapp.com",
+    databaseURL: "https://plug-music-app-database-default-rtdb.firebaseio.com",
+    projectId: "plug-music-app-database",
+    storageBucket: "plug-music-app-database.appspot.com",
+    messagingSenderId: "1053988739108",
+    appId: "1:1053988739108:web:218b4bd545c21269eea0b1"
+});
+
+const db = firebase.database();
+
 class Percentage {
     constructor(value) {
         this.value = value;
@@ -12,10 +24,73 @@ class Percentage {
     }
 }
 
+class AudioTrackPlayer {
+    constructor (player, info) {
+        this.player = player;
+        this.src = this.player.src;
+        this.trackDuration = Math.round(this.player.duration);
+        this.name = info.name;
+    }
+    setTrack (url, info) {
+        this.player.src = url;
 
-var audio = new Audio('rightWhereYouLike.mp3');
+    }
+    play() {
+        this.player.play();
+    }
+    pause() {
+        this.player.pause();
+    }
+    addEventListener(event, callback) {
+        this.player.addEventListener(event, callback);
+    }
+}
+
+var audio;
 
 
+async function setTrack (url) {
+    let Media = new Audio(url);
+
+    Media.addEventListener('loadedmetadata', async () => {
+        let trackInfo = await getTrackInfo(url).catch(err => {
+            console.error(err);
+        });
+
+        audio = new AudioTrackPlayer(Media, trackInfo)
+        displayTrackData(audio)
+
+        Page.init();
+    })
+
+    Media.addEventListener('ended', () => {
+        audioPlayButton._isPlaying ? stopProgress('@audioEnded') : null;
+    })
+}
+
+setTrack('https://cdn.filestackcontent.com/sZYmptisQOqTI6AAYB00');
+
+function getTrackInfo (url) {
+    return new Promise((resolve, reject) => {
+        db.ref(`/tracks`).orderByChild('url').equalTo(url).get().then((snapshot) => {
+            if (snapshot.exists()) {
+                let data = snapshot.val();
+                let track = data[Object.keys(data)[0]]
+                resolve(track);
+            } else {
+                reject('Track not found');
+            }
+        })
+    })
+}
+
+getTrackInfo('https://cdn.filestackcontent.com/sZYmptisQOqTI6AAYB00')
+
+function displayTrackData (player) {
+    let durationEl = dQS('.x252-zo3Vw2');
+    durationEl.dataset.duration = player.trackDuration
+    durationEl.textContent = moment.duration(player.trackDuration, "seconds").format('m:ss', { trim: false });
+}
 
 function setProgressDuration (time, end, isScrubbing=false) {
     let barWidth = new Percentage(time).isWhatPercentOf(end);
@@ -46,6 +121,15 @@ let progressLoopTimeout;
 let progressAnimationTimeout;
 
 function stopProgress (orig) {
+    let currentSeconds = parseFloat(parseFloat(document.querySelector('.x053-zo3Vw2').dataset.current).toFixed(6));
+    let endSeconds = parseInt(document.querySelector('.x252-zo3Vw2').dataset.duration);
+
+    if (currentSeconds == endSeconds || currentSeconds > endSeconds) {
+        if (audioPlayButton._isPlaying) {
+            audioPlayButton.pause(document.querySelector('#bottom-right'));
+        }
+    }
+
     clearTimeout(progressAnimationTimeout);
     clearTimeout(progressLoopTimeout);
     console.warn('STOPPING AUDIO', orig);
@@ -82,7 +166,7 @@ function setAudioCurrentTime (seconds, isScrubbing=false) {
     document.querySelector('.x053-zo3Vw2').dataset.current = seconds;
     setProgressDuration(seconds, parseInt(document.querySelector('.x252-zo3Vw2').dataset.duration), isScrubbing)
 
-    audio.currentTime = seconds;
+    audio.player.currentTime = seconds;
     //console.log('Setting audio time to ' + seconds + ' seconds')
 }
 
@@ -100,10 +184,6 @@ audioPlayButton.onPlay(isPlaying => {
     console.log('RECIEVED ONPLAY CALLBACK, isPlaying=', isPlaying);
     
     progressLoop(isPlaying);
-})
-
-audio.addEventListener('ended', () => {
-    audioPlayButton._isPlaying ? stopProgress('@audioEnded') : null;
 })
 
 
