@@ -63,7 +63,7 @@ class AudioButton {
   function playNoAction (button, fromSameOrigin) {
   
     if (fromSameOrigin == true) {
-      console.log('clicking bottom right');
+      //console.log('clicking bottom right');
       document.querySelector('#bottom-right').click();
       return;
     }
@@ -79,7 +79,7 @@ class AudioButton {
   
   function pauseNoAction (button, fromSameOrigin) {
     if (fromSameOrigin == true) {
-      console.log('clicking bottom right');
+      //console.log('clicking bottom right');
       document.querySelector('#bottom-right').click();
       return;
     }

@@ -39,6 +39,9 @@ function animatePageInit() {
                 dQS('.bg-waves').style.willChange = null;
             }, 2000)
         }, 300)
+        elements.forEach(el => {
+            el.style.transition = null
+        })
     }, 300)
 }
 

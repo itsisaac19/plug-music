@@ -1,6 +1,7 @@
 .playButtonWrapper {
   margin: auto;
   display: grid;
+  position: relative;
 }
 .playButton {
   user-select: none;
@@ -10,7 +11,7 @@
   display: grid;
 
   background: #284652;
-  color: #b7ced8;
+  color: #C8DCE5;
 
   height: 70px;
   width: 70px;
@@ -19,15 +20,50 @@
   overflow: hidden;
 }
 
-.playButton.animate-reverse:focus {
-  outline: none;
-  box-shadow: 0px 30px 60px #5c889a8a, 0px 0px 0px 5px #95b5b2,
-    0px 0px 0px 7px #284652;
+#main-massive + .outer-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 114px;
+  height: 114px;
+  border-radius: 50%;
+  background:  transparent;
+  border: #28465200 2px solid;
+
+  transition: border 0.2s ease;
 }
-.playButton:focus {
-  outline: none;
-  box-shadow: 0px 30px 60px #5c889a8a, 0px 0px 0px 5px #95b5b2,
-    0px 0px 0px 7px #5c889a;
+
+#bottom-right + .outer-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background:  transparent;
+  border: #28465200 2px solid;
+
+  transition: border 0.2s ease;
+}
+
+/* MASSIVE */
+#main-massive.playButton.animate-reverse:focus + div.outer-ring {
+  border: #284652 2px solid;
+}
+#main-massive.playButton:focus + div.outer-ring {
+  border: #5c889a 2px solid;
+}
+
+/* Bottom Right */
+#bottom-right.playButton.animate-reverse:focus + div.outer-ring {
+  border: #284652 2px solid;
+}
+#bottom-right.playButton:focus + div.outer-ring {
+  border: #5c889a 2px solid;
 }
 
 .playButton.depressed {
@@ -41,7 +77,7 @@
 
 .playButton.animate-fill {
   background: #618492;
-  color: #b1ced8;
+  color: #C8DCE5;
 }
 .playButton.animate-reverse {
   background: #618492;

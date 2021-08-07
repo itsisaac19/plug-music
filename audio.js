@@ -83,7 +83,7 @@ function setAudioCurrentTime (seconds, isScrubbing=false) {
     setProgressDuration(seconds, parseInt(document.querySelector('.x252-zo3Vw2').dataset.duration), isScrubbing)
 
     audio.currentTime = seconds;
-    console.log('Setting audio time to ' + seconds + ' seconds')
+    //console.log('Setting audio time to ' + seconds + ' seconds')
 }
 
 audioPlayButton.onPlay(isPlaying => {
@@ -107,23 +107,21 @@ audio.addEventListener('ended', () => {
 })
 
 
-const progressBarWrapper = document.querySelector('.rectangle-1-zo3Vw2');
+const progressBarWrapper = document.querySelector('.player-box');
 
-document.querySelector('.handle').onmousedown = (e) => {
+progressBarWrapper.onmousedown = (e) => {
+    progressBarClickEvent(e);
+    audioHandleMouseDown(e, false);
+}
+
+const audioHandleMouseDown = (mouseDownEvent, fromHandle) => {
     progressBarWrapper.onclick = () => {}
 
-    e.preventDefault();
+    mouseDownEvent.preventDefault();
 
     console.log('Bar Handle Grabbed')
-
-    document.onmouseup = (e) => {
-        document.onmouseup = (e) => {}
-        document.querySelector('.rectangle-1-zo3Vw2').onmousemove = (e) => {}
-        progressBarClickEvent(e);
-        progressBarWrapper.onclick = progressBarClickEvent;
-    }
     
-    document.querySelector('.rectangle-1-zo3Vw2').onmousemove = (e) => {
+    document.querySelector('.music-player-wrapper').onmousemove = (e) => {
         let rect = document.querySelector('.rectangle-1-zo3Vw2').getBoundingClientRect();
         let x = e.clientX - rect.left; //x position within the element.
     
@@ -140,7 +138,25 @@ document.querySelector('.handle').onmousedown = (e) => {
     
         setAudioCurrentTime(Math.round(seconds), true);
     }
+
+
+    document.onmouseup = (mouseUpEvent) => {
+        document.onmouseup = (e) => {}
+        document.querySelector('.music-player-wrapper').onmousemove = (e) => {}
+
+        let mouseUpX = mouseUpEvent.clientX;
+        let mouseDownX = mouseDownEvent.clientX;
+        if (mouseUpX == mouseDownX || Math.abs(mouseUpX - mouseDownX) < 5) {
+            console.log('NO / LOW DRAG DIFF');
+            return;
+        }
+
+        progressBarClickEvent(mouseUpEvent);
+        progressBarWrapper.onclick = progressBarClickEvent;
+    }
 }
+
+document.querySelector('.handle').onmousedown = audioHandleMouseDown;
 
 function progressBarClickEvent (e) {
     var rect = document.querySelector('.rectangle-1-zo3Vw2').getBoundingClientRect();
@@ -158,9 +174,7 @@ function progressBarClickEvent (e) {
     let audioDurationSeconds = parseInt(document.querySelector('.x252-zo3Vw2').dataset.duration);
     let seconds = new Percentage(new Percentage(x).isWhatPercentOf(rect.width)).percentOf(audioDurationSeconds);
 
-    console.log(x, y, new Percentage(x).isWhatPercentOf(rect.width))
+    //console.log(x, y, new Percentage(x).isWhatPercentOf(rect.width))
 
     setAudioCurrentTime(Math.round(seconds));
 }
-
-progressBarWrapper.onclick = progressBarClickEvent
