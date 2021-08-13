@@ -32,7 +32,9 @@
         </div>
         <div class="second-section">
             <div class="second-section-text-wrapper">
-                <button onclick="window.location.href='track.html'">SEE A LIVE DEMO</button>
+                <button onclick="
+                    window.location.href=location.host == 'plugmusic.netlify.app' ? 'track' : 'track.html'
+                ">SEE A LIVE DEMO</button>
             </div>
         </div>
     </div>
@@ -40,6 +42,4 @@
 </body>
 <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
-
-<script src="upload.js"></script>
 </html>

@@ -115,4 +115,21 @@
   font-size: 25px;
   font-weight: bold;
   z-index: 1000;
+  display: grid;
+}
+
+#main-massive .play-icon {
+  margin: auto auto auto 4px;
+  width: 24px;
+  height: 24px;
+}
+
+#bottom-right .play-icon {
+  margin: auto auto auto 3px;
+  width: 17px;
+  height: 17px;
+}
+
+@media (prefers-color-scheme: dark) {
+
 }

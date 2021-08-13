@@ -1,4 +1,4 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"); @font-face {
+@font-face {
     font-family: "Satoshi-Medium";
     font-style: normal;
     font-weight: 500;
@@ -572,6 +572,7 @@ input:focus {
     font-weight: 700;
     height: auto;
     left: 0;
+    margin-top: 0;
     letter-spacing: 0.00px;
     line-height: 88.2px;
     mix-blend-mode: normal;
@@ -597,6 +598,28 @@ input:focus {
     text-align: left;
     bottom: 25px;
     width: 136px;
+
+    transition: color 0.2s ease;
+}
+
+.track-view .now-playing-track-title.paused {
+    color: #729693;
+}
+
+.pausedHinter {
+    color: #172d2b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .track-view .now-playing-track-title {
+        color: #729693;
+    }
+    .track-view .now-playing-track-title.paused {
+        color: #385553;
+    }
+    .pausedHinter {
+        color: #729693;
+    }
 }
 
 .track-view .track-title.listItem {
@@ -818,4 +841,24 @@ input:focus {
     height: 200px;
     top: 121px;
     left: 156px;
+}
+
+
+.google-account-wrapper {
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+    left: 160px;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background: #0b1313;
+    font-family: 'Satoshi-Medium';
+}
+.account-name {
+    color: #c2d1d2;
+}
+
+
+@media (prefers-color-scheme: dark) {
+
 }

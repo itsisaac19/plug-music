@@ -29,6 +29,10 @@ body {
     left: 0;
     right: 0;
 }
+.main-content.hidden {
+    display: none;
+}
+
 .main-inner {
     height: 600px;
     margin: 10px 10px 10px 10%;
@@ -82,13 +86,49 @@ body {
     display: none;
 }
 
+.upload-action-button {
+    position: relative;
+    width: auto;
+    height: 75px;
+    margin-top: 10px;
+    border-radius: 10px;
+
+    background: #0d2628;
+    color: #abc9cb;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    display: grid;
+    place-items: center;
+
+    transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.upload-action-button:hover {
+    color: #c6dfe0;
+    background: #0c2021;
+    box-shadow: 0px 20px 55px #0a212378;
+}
+.upload-action-button.warn {
+    color: #a06258;
+    background: #292218;
+    box-shadow: none;
+}
+.upload-action-button.inprogress {
+    color: #41595d;
+    background: #182829;
+    box-shadow: none;
+}
+
 .upload-wrapper {
     position: relative;
     margin: 50px auto auto 100px;
     width: 550px;
-    height: 300px;
+    height: auto;
+    padding-bottom: 100px;
     display: grid;
 }
+
 
 .upload-wrapper textarea {
     font-family: Satoshi-Medium;
@@ -112,8 +152,48 @@ body {
     color: #182425;
 }
 
+.google-sign-in {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.google-sign-in button {
+    background: #9eb6b7;
+    color: #182325;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    width: 220px;
+    box-shadow: 0px 20px 40px #24393a80;
+    height: 50px;
+    font-size: 17px;
+    font-family: inherit;
+    transition: background 0.2s ease;
+}
+.google-sign-in button:hover {
+    background: #afc6c7;
+}
+.google-sign-in.hidden {
+    display: none;
+}
+
+.google-account-wrapper {
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+    right: 70px;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background: #0b1313;
+}
+.account-name {
+    color: #c2d1d2;
+}
+
+
 .filepondWrapper {
-    margin: 40px auto;
+    margin: 40px auto 0;
     width: 550px;
 }
 
@@ -135,4 +215,17 @@ body {
 }
 .track-detail::placeholder {
     color: #182425;
+}
+
+.checkbox-wrapper {
+    margin: 30px 0px 10px;
+    color: #b8ccce;
+
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 5px;
+}
+.checkbox-group, .checkbox-group > *, .checkbox-group > *:hover {
+    user-select: none;
+    cursor: pointer;
 }
