@@ -58,7 +58,9 @@ function streamTrackFromURL () {
     if (searchParams.has('id')) {
         let id = searchParams.get('id');
         streamAudio(id);
-    }   
+    } else {
+        Page.init(); 
+    }
 }
 streamTrackFromURL();
 
