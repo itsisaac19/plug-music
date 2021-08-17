@@ -48,11 +48,14 @@ firebase.auth().onAuthStateChanged((user) => {
         let userData = user.providerData[0]
         console.log(userData)
 
-        document.querySelector('.account-name').innerHTML = userData.email;
-        document.querySelector('.google-account-wrapper').onclick = () => {
-            firebase.auth().signOut();
+        document.querySelector('.your-tracks-wrapper').onclick = () => {
+            location.href = `/users.html?id=${user.uid}`
         }
-        
+        document.querySelector('.sign-button').innerHTML = 'Sign out';
+        document.querySelector('.sign-button').onclick = () => {
+            firebase.auth().signOut()
+        }
+
         getUserTrackCount().then(trackCount => {
             user.trackCount = trackCount;
 
@@ -67,7 +70,7 @@ firebase.auth().onAuthStateChanged((user) => {
     } else {
         console.warn('user is signed out')
 
-        document.querySelector('.account-name').innerHTML = 'Sign in with Google';
+        document.querySelector('.sign-button').classList.add('abs-hero')
         document.querySelector('.google-account-wrapper').onclick = () => {
             firebase.auth().signInWithRedirect(provider)
         }

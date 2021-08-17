@@ -52,10 +52,10 @@ body {
     background: #3c565f00;
 }
 .top-section {
-    height: 400px;
+    height: 500px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: min-content auto;
+    grid-template-rows: min-content auto auto;
 }
 .middle-section {
     height: 500px;
@@ -111,4 +111,83 @@ body {
     font-size: 20px;
     color: #b3c8d2;
     margin: auto;
+}
+
+
+.google-account-wrapper {
+    width: min-content;
+    white-space: nowrap;
+    margin: 20px 30px;
+    font-family: 'Satoshi-Medium';
+
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.google-account-wrapper > div:first-child {
+    border-radius: 10px 0 0 10px;
+}
+.google-account-wrapper > div:first-child:last-child {
+    border-radius: 10px;
+}
+.google-account-wrapper > div:last-child {
+    border-radius: 0 10px 10px 0;
+}
+.your-tracks-wrapper {
+    cursor: pointer;
+    display: grid;
+    grid-auto-flow: column;
+
+    padding: 13px 20px;
+
+    background: #0b1313;
+    border-right: 1px solid #2f2f2f;
+}
+.your-tracks {
+    color: #b1c7cf;
+    margin: auto;
+}
+.tracks-icon {
+    margin: auto 0px auto 20px;
+    width: 30px;
+    height: 30px;
+}
+
+
+.upload-button {
+    cursor: pointer;
+    color: #b1c7cf;
+    padding: 13px 20px;
+    background: #0b1313;
+    border-right: 1px solid #2f2f2f;
+    display: grid;
+    place-items: center;
+}
+.sign-button {
+    padding: 13px 20px;
+    cursor: pointer;
+    background: #0b1313;
+    color: #b1c7cf;
+    display: grid;
+    place-items: center;
+}
+
+.account-button {
+    transition: background 0.2s ease;
+}
+.account-button:hover {
+    background: #131f1f;
+}
+.account-button {
+    color: #c2d1d2;
+    background: #0b1313;
+    border-radius: 10px;
+    padding: 13px 22px;
+}
+.account-button.abs-hero {
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -53,11 +53,11 @@ class AudioTrackPlayer {
     }    
 }
 
-function streamTrackFromURL () {
+function streamTrackFromURL (callback) {
     let searchParams = new URL(location.href).searchParams;
     if (searchParams.has('id')) {
         let id = searchParams.get('id');
-        streamAudio(id);
+        streamAudio(id, callback);
     } else {
         location.href = `/users.html` 
     }
@@ -66,7 +66,7 @@ function streamTrackFromURL () {
 
 var audio;
 
-async function streamAudio (id) {
+async function streamAudio (id, callback) {
     let Media;
     let track; 
 
@@ -91,6 +91,8 @@ async function streamAudio (id) {
             }
         }
 
+        // Callback
+        callback();
         // Display Track information i.e. artist, title
         displayTrackData(audio)
         // Initialize Page Entry Animations

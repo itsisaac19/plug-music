@@ -36,7 +36,7 @@ body {
 
 .main-inner {
     height: 600px;
-    margin: 10px 10px 10px 10%;
+    margin: 10px 10px 10px 60px;
 }
 
 .upload-wrapper .lyrics-upload-wrapper textarea {
@@ -65,7 +65,7 @@ body {
 
 .upload-directions {
     width: 50%;
-    margin: 100px auto auto 100px;
+    margin: 140px auto auto 100px;
 }
 
 .upload-directions > h1 {
@@ -153,43 +153,78 @@ body {
     color: #182425;
 }
 
-.google-sign-in {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.google-sign-in button {
-    background: #9eb6b7;
-    color: #182325;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    width: 220px;
-    box-shadow: 0px 20px 40px #24393a80;
-    height: 50px;
-    font-size: 17px;
-    font-family: inherit;
-    transition: background 0.2s ease;
-}
-.google-sign-in button:hover {
-    background: #afc6c7;
-}
-.google-sign-in.hidden {
-    display: none;
-}
-
 .google-account-wrapper {
-    cursor: pointer;
     position: absolute;
     top: 40px;
-    right: 70px;
-    border-radius: 10px;
-    padding: 10px 25px;
+    left: 160px;
+    font-family: 'Satoshi-Medium';
+
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.google-account-wrapper > div:first-child {
+    border-radius: 10px 0 0 10px;
+}
+.google-account-wrapper > div:last-child {
+    border-radius: 0 10px 10px 0;
+}
+.your-tracks-wrapper {
+    cursor: pointer;
+    display: grid;
+    grid-auto-flow: column;
+
+    padding: 13px 20px;
+
     background: #0b1313;
+    border-right: 1px solid #2f2f2f;
+}
+.your-tracks {
+    color: #b1c7cf;
+    margin: auto;
+}
+.tracks-icon {
+    margin: auto 0px auto 20px;
+    width: 30px;
+    height: 30px;
+}
+
+
+.upload-button {
+    cursor: pointer;
+    color: #b1c7cf;
+    padding: 13px 20px;
+    background: #0b1313;
+    border-right: 1px solid #2f2f2f;
+    display: grid;
+    place-items: center;
+}
+.sign-button {
+    padding: 13px 20px;
+    cursor: pointer;
+    background: #0b1313;
+    color: #b1c7cf;
+    display: grid;
+    place-items: center;
+}
+
+.account-button {
+    transition: background 0.2s ease;
+}
+.account-button:hover {
+    background: #131f1f;
 }
 .account-name {
     color: #c2d1d2;
+    background: #0b1313;
+    border-radius: 10px;
+    padding: 13px 22px;
+}
+.account-name.abs-hero {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 

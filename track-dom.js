@@ -5,7 +5,7 @@ firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         let userData = user.providerData[0]
         //console.log(userData)
-        document.querySelector('.your-tracks').innerText = 'Your Tracks ';
+        document.querySelector('.your-tracks').innerText = 'Your Tracks';
         document.querySelector('.sign-button').innerHTML = 'Sign out';
         document.querySelector('.sign-button').onclick = () => {
             firebase.auth().signOut()
@@ -17,13 +17,21 @@ firebase.auth().onAuthStateChanged((user) => {
             location.href = '/upload.html'
         }
 
-        streamTrackFromURL();
+        streamTrackFromURL(assignInitalListeners);
     } else {
         console.warn('user is signed out')
+
         document.querySelector('.sign-button').innerHTML = 'Sign in';
         document.querySelector('.sign-button').onclick = () => {
             firebase.auth().signInWithRedirect(provider)
         }
+        document.querySelector('.your-tracks-wrapper').onclick = () => {
+            location.href = `/users.html`
+        }
+        document.querySelector('.upload-button').onclick = () => {
+            location.href = '/upload.html'
+        }
+
         Page.init()
     }
 });    

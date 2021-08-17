@@ -11,15 +11,6 @@ firebase.initializeApp({
     appId: "1:1053988739108:web:218b4bd545c21269eea0b1"
 });
 
-router.on('/users.html', ({ params }) => {
-    console.log(params)
-})
-
-router.on('/auth', ({ pathData }) => {
-    console.log(pathData)
-    firebase.auth().signInWithRedirect(provider)
-})
-
 function start (user) {
     console.log(user)
     var firstName =  user.displayName.split(' ').slice(0, -1).join(' ');
@@ -33,6 +24,15 @@ function start (user) {
     let searchParams = new URL(location.href).searchParams;
     let currentUser = firebase.auth().currentUser
 
+    document.querySelector('.upload-button').onclick = () => {
+        location.href = '/upload.html'
+    }
+    document.querySelector('.sign-button').onclick = () => {
+        firebase.auth().signOut();
+        document.querySelector('.sign-button').innerHTML = 'Sign in'
+        location.reload();
+    }
+
     if (currentUser) {
         console.log('firebase user is logged in')
         return start(currentUser.providerData[0]);
@@ -41,21 +41,31 @@ function start (user) {
     firebase.auth().onAuthStateChanged((user) => {
         if (!user) {
             searchParams.delete('id')
-            router.navigate('/auth');
+            document.querySelector('.sign-button').classList.add('abs-hero')
+            document.querySelector('.sign-button').onclick = () => {
+                firebase.auth().signInWithRedirect(provider)
+            }
+            document.querySelector('.upload-button').remove()
             return console.warn('ID in params but not signed in')
         }
+
+        document.querySelector('.sign-button').innerHTML = 'Sign out'
 
         if (searchParams.has('id')) {    
             if (user.uid != searchParams.get('id')) {
                 searchParams.delete('id')
-                router.navigate('/auth');
+                document.querySelector('.sign-button').classList.add('abs-hero')
+                document.querySelector('.upload-button').remove()
+                document.querySelector('.sign-button').onclick = () => {
+                    firebase.auth().signInWithRedirect(provider)
+                }
                 return console.warn('ID in params does not match with signed in user ID')
             }
     
             start(user)
             return console.log('got id from params');
         } else {
-            router.navigate('/users.html?id=' + user.uid);
+            window.history.replaceState({}, '', `users.html?id=${user.uid}`)
             start(user)
             return console.warn('ID from firebase pushed to router URL')
         }
