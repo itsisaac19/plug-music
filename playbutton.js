@@ -3,6 +3,7 @@ class AudioButton {
       this.button = buttonElement;
       this.isPlaying = false;
       this._isPlaying = false;
+      this.timesPressed = 0;
     }
     play(button) {
       button.classList.remove('animate-reverse')
@@ -12,6 +13,7 @@ class AudioButton {
         audioPlayButton.pause(this.button)
       };
   
+      audioPlayButton.timesPressed++;
       audioPlayButton.isPlaying = true;
   
       button.querySelectorAll('.icon')[0].innerHTML = '| |'
@@ -26,11 +28,15 @@ class AudioButton {
   
       audioPlayButton.isPlaying = false;
       
-      button.querySelectorAll('.icon')[0].innerHTML = '▶'
+      button.querySelectorAll('.icon')[0].innerHTML = `
+      <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" width="37" height="43" viewBox="0 0 37 43">
+        <path id="Polygon_1" data-name="Polygon 1" d="M21.5,0,43,37H0Z" transform="translate(37) rotate(90)" fill="#c8dce5"/>
+      </svg>
+      `
     }
     playButtonListener = (state) => {}
     onPlay(cb) {
-        this.playButtonListener = cb;
+      this.playButtonListener = cb;
     }
     set isPlaying (state) {
       this._isPlaying = state;

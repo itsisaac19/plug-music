@@ -1,24 +1,29 @@
 const provider = new firebase.auth.GoogleAuthProvider();
+const router = new Navigo('/');
 
-if (!offline) {
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            let userData = user.providerData[0]
-            console.log(userData)
-            document.querySelector('.account-name').innerHTML = userData.email;
-            document.querySelector('.google-account-wrapper').onclick = () => {
-                firebase.auth().signOut()
-            }
-        } else {
-            console.warn('user is signed out')
-            document.querySelector('.account-name').innerHTML = 'Sign in to your account';
-            document.querySelector('.google-account-wrapper').onclick = () => {
-                firebase.auth().signInWithRedirect(provider)
-            }
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        let userData = user.providerData[0]
+        //console.log(userData)
+        document.querySelector('.your-tracks').innerText = 'Your Tracks ';
+        document.querySelector('.sign-button').innerHTML = 'Sign out';
+        document.querySelector('.sign-button').onclick = () => {
+            firebase.auth().signOut()
         }
-    });    
-}
-
+        document.querySelector('.your-tracks-wrapper').onclick = () => {
+            location.href = `/users.html?id=${user.uid}`
+        }
+        document.querySelector('.upload-button').onclick = () => {
+            location.href = '/upload.html'
+        }
+    } else {
+        console.warn('user is signed out')
+        document.querySelector('.sign-button').innerHTML = 'Sign in';
+        document.querySelector('.sign-button').onclick = () => {
+            firebase.auth().signInWithRedirect(provider)
+        }
+    }
+});    
 
 
 function setInfoHeight () {
@@ -76,12 +81,12 @@ function setColorTheme () {
         .playButton::after, 
         .playButton
         {
-          background: #557380;
+          background: #17252b;
         }
         #bottom-right.playButton.animate-reverse:focus + div.outer-ring,
         #main-massive.playButton.animate-reverse:focus + div.outer-ring
         {
-          border: #557380 2px solid;
+          border: #17252a 2px solid;
         }
     `
     let theme = document.body.dataset.theme;

@@ -21,6 +21,7 @@
 
 body {
     background: #1E2E2F;
+    overflow-x: hidden;
     font-family: Satoshi-Medium;
 }
 .main-content {

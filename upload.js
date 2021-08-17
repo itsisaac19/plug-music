@@ -104,11 +104,11 @@ const pond = FilePond.create(uploadElement, {
         }),
     instantUpload: false,
     server: {
-        url: `https://www.filestackapi.com/api/store/S3?key=${FILESTACK_API_KEY}`,
+        url: `https://plugmusic-api.herokuapp.com/`,
         revert: (res) => {
-            const file = JSON.parse(res);
-            console.log(file);
-            return;
+            let track = JSON.parse(res);
+            let trackID = track.trackUID;
+
             const request = new XMLHttpRequest();
 
             request.onreadystatechange = function() {
@@ -117,30 +117,45 @@ const pond = FilePond.create(uploadElement, {
                 }
             }
 
-            request.open('DELETE', `https://www.filestackapi.com/api/file/${file.id}?key=${FILESTACK_API_KEY}`);
+            request.open('DELETE', `https://plugmusic-api.herokuapp.com/delete${trackID}`);
             request.send();
         },
         process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
-            // fieldName is the name of the input field, file is the actual file object to send
-            const formData = new FormData();
-            formData.append('file', file, file.name);
+            // Create FileReader instance
+            let reader = new FileReader();
+
+            // Read file as base64 string
+            reader.readAsDataURL(file);
 
             let trackTitle = document.querySelector('#trackTitle').value;
             let trackArtist = document.querySelector('#trackArtist').value;
-            let trackDescription = document.querySelector('#trackDescription').value;
-            let trackLyrics = document.querySelector('#trackLyrics').value;
+            let trackDescription = document.querySelector('#trackDescription').value.replace(/(?:\r\n|\r|\n)/g, '<br>');
+            let trackLyrics = document.querySelector('#trackLyrics').value.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
-            let trackInfo = {
-                trackTitle, 
-                trackArtist, 
-                trackDescription, 
-                trackLyrics
+            let info = {
+                title: trackTitle, 
+                artist: trackArtist, 
+                description: trackDescription, 
+                lyrics: trackLyrics
             }
+
+            let userId = currentUser().uid;
             
             const request = new XMLHttpRequest();
 
-            request.open('POST', `https://www.filestackapi.com/api/store/S3?key=${FILESTACK_API_KEY}`);
-            request.setRequestHeader('Content-Type', 'audio/mpeg');
+            request.open('POST', `https://plugmusic-api.herokuapp.com/upload`);
+            request.setRequestHeader('Content-Type', 'application/json');
+
+            reader.onload = (e) => {
+                let encodedString = e.target.result;
+                let data = JSON.stringify({
+                    data: encodedString,
+                    info: info,
+                    uid: userId
+                })
+
+                request.send(data)
+            }
 
             request.upload.onprogress = (e) => {
                 progress(e.lengthComputable, e.loaded, e.total);
@@ -156,11 +171,11 @@ const pond = FilePond.create(uploadElement, {
 
             request.onreadystatechange = function() {
                 if (request.readyState === 4) {
-                  saveTrackUrl(JSON.parse(request.response), trackInfo);
+                    console.log(request.response)
                 }
             }
             
-            request.send(file)
+            
             
             // Should expose an abort method so the request can be cancelled
             return {
@@ -176,37 +191,31 @@ const pond = FilePond.create(uploadElement, {
     },
 });
 
-document.addEventListener('FilePond:addfile', () => {
-    if (isSignedIn() == false) {
-        alert('Please sign in');
+document.addEventListener('FilePond:addfile', () => {    
+    if (isSignedIn() == false || uploadFields.isPopulated() == false) {
         pond.removeFiles();
-    } else if (uploadFields.isPopulated() == false) {
-        alert('Please fill in all required fields');
-        pond.removeFiles();
+        let errorMessage = isSignedIn() == false ? 'Please sign in' : 'Please fill in all required fields';
+        alert(errorMessage)
+        document.querySelector('.upload-action-button').onclick = () => {};
     } else {
-        console.log('User added a file')
+        document.querySelector('.upload-action-button').onclick = uploadButtonHandler;
     }
-
-    let filePondUploadButton = document.querySelector('button.filepond--file-action-button.filepond--action-process-item');
-    console.log(filePondUploadButton)
 });
 document.addEventListener('FilePond:processfilestart', uploadButtonHandler);
-document.querySelector('.upload-action-button').addEventListener('click', uploadButtonHandler);
 
 function uploadButtonHandler (fromSameOrigin=true) {
     let uploadButton = document.querySelector('.upload-action-button');
-    
-    console.log(uploadFields.isPopulated())
 
-    if (isSignedIn()) {
-        if (uploadFields.isPopulated() == false) return alert('please fill out the required fields.'); 
+    if (isSignedIn() == false || uploadFields.isPopulated() == false) {
+        let errorMessage = isSignedIn() == false ? 'Please sign in' : 'Please fill in all required fields';
+        alert(errorMessage)
+
+        uploadButton.classList.remove('inprogress');
+        uploadButton.classList.add('warn');
+    } else {
         uploadButton.classList.add('inprogress');
         if (fromSameOrigin == false) return;
         document.querySelector('button.filepond--file-action-button.filepond--action-process-item').click();
-    } else {
-        uploadButton.classList.remove('inprogress');
-        uploadButton.classList.add('warn');
-        alert('Please sign in')
     }
 }
 

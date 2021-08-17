@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" name="" id="fileupload">
+    <button id="upload-button">upload</button>
+</body>
+<script>
+    let player = new Audio();
+
+    const streamAudio = async (id) => {
+        let trackRequest = await fetch(`http://localhost:3000/stream/${id}`)
+        let trackData = await trackRequest.text();
+        player.src = trackData;
+    }
+    streamAudio('1197aed269a');
+    
+    function uploadAudio (file, userId, info={
+        title: '',
+        artist: '',
+        description: '',
+        lyrics: ''
+    }) {
+        // Create FileReader instance
+        let reader = new FileReader();
+
+        // Read file as base64 string
+        reader.readAsDataURL(file);
+
+        // When reader loads the string
+        reader.onload = async (e) => {
+            let encodedString = event.target.result;
+
+            let trackTitle = 'test';
+            let trackArtist = 'test';
+            let trackDescription = 'test';
+            let trackLyrics = 'test';
+
+            let data = JSON.stringify({
+                data: encodedString,
+                info: info,
+                uid: userId
+            })
+            
+            let request = await fetch('http://localhost:3000/upload', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            })
+            console.log('sending:' + encodedString.substring(0, 100));
+            
+            let response = await request.json();
+            console.log(response)
+        }
+    };
+</script>
+</html>

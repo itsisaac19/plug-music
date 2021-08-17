@@ -13,3 +13,4 @@ function pageInit() {
     let mainContent = document.querySelector('.main-content');
     mainContent.classList.remove('hidden')
 }
+

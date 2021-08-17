@@ -1,0 +1,114 @@
+@font-face {
+    font-family: "Satoshi-Medium";
+    font-style: normal;
+    font-weight: 500;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60f162c42b6702791dd668c8/fonts/satoshi-medium.woff') format("woff");
+}
+
+@font-face {
+    font-family: "Satoshi-Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60c8dfb401c829d7b60f5d67/fonts/satoshi-bold.otf') format("opentype");
+}
+
+@font-face {
+    font-family: "Satoshi-Regular";
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://anima-uploads.s3.amazonaws.com/projects/60e032ae67b50683596e95a5/fonts/satoshi-regular.ttf') format("truetype");
+}
+
+body {
+    background: #344c55;
+}
+
+.main-outer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.main-inner {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+}
+.main-grid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    max-width: 1600px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 10px;
+}
+.section {
+    background: #3c565f00;
+}
+.top-section {
+    height: 400px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content auto;
+}
+.middle-section {
+    height: 500px;
+}
+
+.greeting {
+    margin: 20px 30px;
+    color: white;
+    font-size: 40px;
+    font-family: 'Satoshi-Medium';
+}
+
+.latest-cards-wrapper {
+    margin: 0;
+    width: min-content;
+    max-width: calc(100vw - 85px);
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.latest-cards-wrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.latest-cards {
+    margin: 0 30px 30px 30px;
+    display: grid;
+    width: min-content;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr;
+    grid-auto-flow: column;
+    column-gap: 10px;
+}
+
+.latest-card {
+    cursor: pointer;
+    display: grid;
+    grid-auto-flow: row;
+    height: 260px;
+    width: 210px;
+    border-radius: 14px;
+    background: #293e46;
+    box-shadow: 0 10px 30px rgb(41 62 70 / 56%);
+    transition: background 0.1s ease-in-out;
+}
+.latest-card:hover {
+    background: #3b545f;
+}
+
+.latest-card .track-card-title {
+    font-family: Satoshi-Bold;
+    font-size: 20px;
+    color: #b3c8d2;
+    margin: auto;
+}

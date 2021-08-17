@@ -23,6 +23,11 @@
     outline: none;
 }
 
+body {
+    background: #1E2E2F;
+    overflow: hidden;
+}
+
 .screen * {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
@@ -223,7 +228,7 @@ input:focus {
 
 .track-view .rectangle-top-left {
     background-color: var(--main-bg);
-    height: calc(100vh - 139px);
+    height: 100vh;
     left: 0px;
     position: absolute;
     top: 0px;
@@ -456,7 +461,7 @@ input:focus {
 .handle:hover {
     background: #2d5567;
 }
-.music-player-wrapper:hover .progress-bar .handle-wrapper .handle {
+.player-box:hover .progress-bar .handle-wrapper .handle {
     opacity: 1;
 }
 
@@ -576,10 +581,12 @@ input:focus {
     letter-spacing: 0.00px;
     line-height: 88.2px;
     mix-blend-mode: normal;
-    position: absolute;
+    position: relative;
     text-align: left;
     top: 0px;
-    width: 484px;
+    width: 70vw;
+    max-width: 1000px;
+    margin-bottom: 20px;
 }
 
 .track-view .now-playing-track-title {
@@ -688,10 +695,11 @@ input:focus {
     letter-spacing: 0.00px;
     line-height: normal;
     mix-blend-mode: normal;
-    position: absolute;
+    position: relative;
     text-align: left;
-    top: 205px;
+    top: 0;
     width: 218px;
+    padding-left: 3px;
 }
 
 .track-view .about-the-artist-zo3Vw2 {
@@ -828,11 +836,126 @@ input:focus {
     display: grid;
 }
 
-.music-player-container {
+.bottom-bar-outer {
+    position: absolute;
+    height: 106px;
+    right: 0;
+    left: 0;
+    bottom: 0px;
+    width: auto;
+
+    display: grid;
+}
+.bottom-bar-outer.waiting {
+    bottom: -10px;
+    opacity: 0;
+}
+.bottom-bar-inner {
+    border-radius: 15px;
+    backdrop-filter: blur(6px);
+    background: rgba(69, 69, 69, 0.509);
+
+    margin: 0px 20px 20px;
+    width: auto;
+
+    display: grid;
+    grid-template-columns: min-content 4fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.track-playing {
+    margin: 10px;
+    height: auto;
+    width: auto;
+    display: grid;
+    grid-template-columns: 100px min-content;
+    grid-template-rows: 1fr;
+}
+.track-card {
+    border-radius: 15px;
+    background: rgb(33, 32, 32);
+}
+.track-info {
+    padding: 8px 0px 5px 20px;
+    font-family: 'Satoshi-Medium';
+    color: white;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    white-space: nowrap;
+}
+.track-playing-title {
+    font-family: 'Satoshi-Bold';
+
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.track-playing-artist {
+    color: rgb(182, 182, 182);
+
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-outer {
     margin: auto 10px;
     width: auto;
-    height: 20px;
+    height: 100%;
     position: relative;
+
+    display: grid;
+    grid-template-columns: min-content min-content 1fr min-content;
+    grid-template-rows: 1fr;
+    grid-auto-flow: column;
+}
+
+.player-controls {
+    margin: 0 40px 0 0;
+    width: min-content;
+
+    display: grid;
+}
+
+.player-currentTime {
+    margin: auto 20px auto 0;
+    font-family: 'Satoshi-Bold';
+    color: white;
+
+    letter-spacing: 1px;
+}
+
+.player-endTime {
+    margin: auto 0px auto 20px;
+    font-family: 'Satoshi-Medium';
+    color: #c6d4d4;
+    letter-spacing: 1px;
+}
+.player-bar {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    top: 1px;
+
+    margin: auto;
+    cursor: pointer;
+
+    border-radius: 17px;
+
+    background: #101918;
+}
+.player-bar .progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    height: 10px;
+    width: 0%;
+    transition: width 0.2s;
+    border-radius: 17px;
+    background-color: #55726f;
 }
 
 .track-details {
@@ -845,17 +968,61 @@ input:focus {
 
 
 .google-account-wrapper {
-    cursor: pointer;
     position: absolute;
     top: 40px;
     left: 160px;
-    border-radius: 10px;
-    padding: 10px 25px;
-    background: #0b1313;
     font-family: 'Satoshi-Medium';
+
+    display: grid;
+    grid-auto-flow: column;
 }
-.account-name {
-    color: #c2d1d2;
+.your-tracks-wrapper {
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+    display: grid;
+    grid-auto-flow: column;
+
+    padding: 13px 20px;
+
+    background: #0b1313;
+    border-right: 1px solid #2f2f2f;
+}
+.your-tracks {
+    color: #b1c7cf;
+    margin: auto;
+}
+.tracks-icon {
+    margin: auto 0px auto 20px;
+    width: 30px;
+    height: 30px;
+}
+
+
+.upload-button {
+    border-radius: 0px;
+    cursor: pointer;
+    color: #b1c7cf;
+    padding: 13px 20px;
+    background: #0b1313;
+    border-right: 1px solid #2f2f2f;
+    display: grid;
+    place-items: center;
+}
+.sign-button {
+    border-radius: 0 10px 10px 0;
+    padding: 13px 20px;
+    cursor: pointer;
+    background: #0b1313;
+    color: #b1c7cf;
+    display: grid;
+    place-items: center;
+}
+
+.account-button {
+    transition: background 0.2s ease;
+}
+.account-button:hover {
+    background: #131f1f;
 }
 
 
