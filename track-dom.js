@@ -16,12 +16,15 @@ firebase.auth().onAuthStateChanged((user) => {
         document.querySelector('.upload-button').onclick = () => {
             location.href = '/upload.html'
         }
+
+        streamTrackFromURL();
     } else {
         console.warn('user is signed out')
         document.querySelector('.sign-button').innerHTML = 'Sign in';
         document.querySelector('.sign-button').onclick = () => {
             firebase.auth().signInWithRedirect(provider)
         }
+        Page.init()
     }
 });    
 

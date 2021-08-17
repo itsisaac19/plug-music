@@ -59,10 +59,10 @@ function streamTrackFromURL () {
         let id = searchParams.get('id');
         streamAudio(id);
     } else {
-        Page.init(); 
+        location.href = `/users.html` 
     }
 }
-streamTrackFromURL();
+
 
 var audio;
 
